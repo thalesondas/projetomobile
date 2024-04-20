@@ -1,5 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import Botao from './src/components/Botao'
+import AreaInput from './src/components/AreaInput'
 
 const Login = () => {
     return(
@@ -9,11 +10,9 @@ const Login = () => {
             </View>
 
             <View style={estilos.cInput} >
-                <Text style={estilos.texto}>E-mail</Text>
-                <TextInput style={estilos.textoInput}></TextInput>
 
-                <Text style={estilos.texto}>Senha</Text>
-                <TextInput style={estilos.textoInput}></TextInput>
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' />
+                <AreaInput texto='Senha' placeholder='Coloque sua senha' />
 
                 <Botao texto='Entrar' cor='#41b06c' />
             </View>
@@ -33,6 +32,10 @@ const estilos = StyleSheet.create({
         flexDirection: 'column',
         paddingHorizontal: 20
     },
+    textoHeader: {
+        fontSize: 34,
+        color: 'white'
+    },
     cTitulo: {
         flex: 0.15,
         justifyContent: 'center',
@@ -45,21 +48,6 @@ const estilos = StyleSheet.create({
     cBotao: {
         flex: 0.40,
         justifyContent: 'center'
-    },
-    textoHeader: {
-        fontSize: 34,
-        color: 'white'
-    },
-    texto: {
-        fontSize: 24,
-        color: 'white'
-    },
-    textoInput: {
-        backgroundColor: 'white',
-        color: 'black',
-        marginBottom: 15,
-        fontSize: 20,
-        paddingLeft: 10
     }
 })
 
