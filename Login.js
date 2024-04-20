@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Botao from './src/components/Botao'
 import AreaInput from './src/components/AreaInput'
 
@@ -14,7 +14,7 @@ const Login = () => {
                 <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' />
                 <AreaInput texto='Senha' placeholder='Coloque sua senha' />
 
-                <Botao texto='Entrar' cor='#41b06c' />
+                <Botao texto='Entrar' cor='#41b06c' marginTop='30' />
             </View>
 
             <View style={estilos.cBotao} >

@@ -1,4 +1,4 @@
-import { TextInput, Text, View, StyleSheet } from 'react-native'
+import { View, TextInput, Text, StyleSheet } from 'react-native'
 
 const AreaInput = (props) => {
     return(
