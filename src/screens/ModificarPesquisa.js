@@ -12,6 +12,18 @@ const ModificarPesquisa = (props) => {
     props.navigation.navigate('HomePlaceholder')
   }
 
+  const Excluir = () => {
+    ClosePopup()
+    props.navigation.navigate('HomePlaceholder')
+  }
+
+  const OpenPopup = () => {
+    setVisibleModal(true)
+  }
+  const ClosePopup = () => {
+    setVisibleModal(false)
+  }
+
   return (
     <View style={estilos.fundo}>
       <View style={estilos.componentes}>
@@ -36,7 +48,7 @@ const ModificarPesquisa = (props) => {
 
         <View style={estilos.ViewBotao2}>
           <Botao2 texto="SALVAR" funcao={Salvar} cor="#37BD6D" style={estilos.Botao2}/>
-          <TouchableOpacity style={estilos.deleteView} onPress={() => setVisibleModal(true)}>
+          <TouchableOpacity style={estilos.deleteView} onPress={OpenPopup}>
             <Icon name="delete" size={40} color="#ffffff"></Icon>
             <Text style={estilos.deleteTexto}>Apagar</Text>
           </TouchableOpacity>
@@ -46,8 +58,8 @@ const ModificarPesquisa = (props) => {
           <View style={estilos.modal}>
             <Text style={estilos.texto}>Tem certeza de apagar essa pesquisa?</Text>
             <View style={estilos.modalBotoes}>
-              <Botao2 texto="SIM" funcao={() => setVisibleModal(false)} cor="#FF8383" width="40%"/>
-              <Botao2 texto="CANCELAR" funcao={() => setVisibleModal(false)} cor="#3F92C5" width="40%"/>
+              <Botao2 texto="SIM" funcao={Excluir} cor="#FF8383" width="40%"/>
+              <Botao2 texto="CANCELAR" funcao={ClosePopup} cor="#3F92C5" width="40%"/>
             </View>
           </View>
         </Modal>
