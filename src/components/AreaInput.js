@@ -32,10 +32,12 @@ const AreaInput = (props) => {
 
 const estilos = StyleSheet.create({
     texto: {
+        fontFamily: "AveriaLibre-Regular",
         fontSize: 24,
         color: 'white'
     },
     textoInput: {
+        fontFamily: "AveriaLibre-Regular",
         backgroundColor: 'white',
         color: 'black',
         marginBottom: 15,

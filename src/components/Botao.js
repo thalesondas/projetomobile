@@ -18,6 +18,7 @@ const estilos = StyleSheet.create({
         borderWidth: 1
     },
     texto: {
+        fontFamily: "AveriaLibre-Regular",
         color: 'white',
         fontSize: 24,
         textAlign: 'center'

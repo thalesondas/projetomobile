@@ -54,6 +54,7 @@ const estilos = StyleSheet.create({
         justifyContent: 'center',
     },
     erro: {
+        fontFamily: "AveriaLibre-Regular",
         color: 'red'
     }
 })

@@ -36,7 +36,7 @@ const Login = (props) => {
         <View style={estilos.view}>
             <View style={estilos.cTitulo} >
                 <Text style={estilos.textoHeader}>Satisfying.you </Text>
-                <Text style={estilos.textoHeader}> <Icon name='mood' size={50} color='white' /></Text>
+                <Text style={estilos.textoHeader}> <Icon name='sentiment-satisfied' size={50} color='white' /></Text>
             </View>
 
             <View style={estilos.cInput} >
@@ -64,10 +64,12 @@ const estilos = StyleSheet.create({
         paddingHorizontal: 20
     },
     textoHeader: {
+        fontFamily: "AveriaLibre-Regular",
         fontSize: 34,
         color: 'white'
     },
     erro: {
+        fontFamily: "AveriaLibre-Regular",
         color: 'red'
     },
     cTitulo: {

@@ -27,6 +27,7 @@ const estilos = StyleSheet.create({
         alignItems: 'center'
     },
     texto: {
+        fontFamily: "AveriaLibre-Regular",
         color: 'white',
         fontSize: 34,
         textAlign: 'center',

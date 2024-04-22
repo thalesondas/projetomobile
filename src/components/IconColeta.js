@@ -19,6 +19,7 @@ const estilos = StyleSheet.create({
         margin: 30
     },
     texto: {
+        fontFamily: "AveriaLibre-Regular",
         color: 'white',
         fontSize: 30,
         textAlign: 'center'
