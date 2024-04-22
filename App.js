@@ -17,7 +17,7 @@ const App = () => {
 
     return(
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#21174c' }, headerTintColor: 'white' }}>
+            <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#21174c' }, headerTitleStyle: { fontFamily: 'AveriaLibre-Regular' } ,headerTintColor: 'white' }}>
                 <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}/>
                 <Stack.Screen name='NovaConta' component={NovaConta} options={{ headerTitle: 'Nova Conta' }}/>
                 <Stack.Screen name='RecuperarSenha' component={RecuperarSenha} options={{ headerTitle: 'Recuperar Senha' }}/>
