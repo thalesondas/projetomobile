@@ -1,18 +1,21 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { useEffect } from 'react'
+import { Text, StyleSheet } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import useNavigate from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const IconFace = (props) => {
+const IconColeta = (props) => {
 
     return(
-        <View style={estilos.iconView} >
+        <TouchableOpacity style={estilos.container} onPress={props.funcao}>
             <Text style={estilos.icons}><Icon name={props.nomeIcone} size={60} color={props.cor} /></Text>
             <Text style={estilos.texto}>{props.texto}</Text>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const estilos = StyleSheet.create({
-    iconView: {
+    container: {
         margin: 30
     },
     texto: {
@@ -25,4 +28,4 @@ const estilos = StyleSheet.create({
     } 
 })
 
-export default IconFace
+export default IconColeta

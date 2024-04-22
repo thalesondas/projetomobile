@@ -1,8 +1,12 @@
 import { View, StyleSheet, Text } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import IconFace from '../components/IconFace'
+import IconColeta from '../components/IconColeta'
 
 const Coleta = (props) => {
+
+    const goToAgradecimentoParticipacao = () => {
+        props.navigation.navigate('AgradecimentoParticipacao')
+    }
+
     return(
         <View style={estilos.view}>
 
@@ -11,11 +15,11 @@ const Coleta = (props) => {
             </View>
 
             <View style={estilos.cIcons} >
-                <IconFace nomeIcone='sentiment-very-dissatisfied' cor='red' texto='Péssimo' />
-                <IconFace nomeIcone='sentiment-dissatisfied' cor='orange' texto='Ruim' />
-                <IconFace nomeIcone='sentiment-neutral' cor='yellow' texto='Neutro' />
-                <IconFace nomeIcone='sentiment-satisfied' cor='#05ad2c' texto='Bom' />
-                <IconFace nomeIcone='sentiment-very-satisfied' cor='#0ff007' texto='Excelente' />
+                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-very-dissatisfied' cor='red' texto='Péssimo' />
+                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-dissatisfied' cor='orange' texto='Ruim' />
+                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-neutral' cor='yellow' texto='Neutro' />
+                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-satisfied' cor='#05ad2c' texto='Bom' />
+                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-very-satisfied' cor='#0ff007' texto='Excelente' />
             </View>
         </View>
     )
