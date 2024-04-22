@@ -22,9 +22,9 @@ const Login = (props) => {
             setTimeout(() => {
                 setErro('')
             }, 3000);
-            return
+        } else {
+            goToPagina('HomePlaceholder')
         }
-        goToPagina('HomePlaceholder')
     }
 
     // Navegar para outras páginas com StackNavigator

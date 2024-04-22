@@ -10,25 +10,31 @@ const NovaConta = (props) => {
     const [senha2, setSenha2] = useState('')
     const [erro, setErro] = useState('')
 
+    const validarEmail = () => {
+        // Expressão regular para validar o formato do e-mail
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return regex.test(email)
+    }
+
     const handleCadastrar = () => {
         if(!email || !senha || !senha2){
             setErro('Necessário o preenchimento de todos os campos.')
             setTimeout(() => {
                 setErro('')
             }, 3000);
-            return
+        } else if (!validarEmail() || !senha){
+            setErro('E-mail inválido.')
+            setTimeout(() => {
+                setErro('')
+            }, 3000);
         } else if(senha != senha2){
             setErro('O campo repetir senha difere da senha.')
             setTimeout(() => {
                 setErro('')
             }, 3000);
-            return
+        } else {
+            props.navigation.navigate('Login')
         }
-        goToLogin()
-    }
-
-    const goToLogin = () => {
-        props.navigation.navigate('Login')
     }
 
     return(

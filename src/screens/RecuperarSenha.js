@@ -20,13 +20,9 @@ const RecuperarSenha = (props) => {
             setTimeout(() => {
                 setErro('')
             }, 3000);
-            return
+        } else {
+            props.navigation.navigate('Login')
         }
-        goToLogin()
-    }
-
-    const goToLogin = () => {
-        props.navigation.navigate('Login')
     }
 
     return(
