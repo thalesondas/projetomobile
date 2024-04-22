@@ -1,12 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native'
 import Botao from './src/components/Botao'
 import AreaInput from './src/components/AreaInput'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Login = () => {
     return(
         <View style={estilos.view}>
             <View style={estilos.cTitulo} >
-                <Text style={estilos.textoHeader}>Satisfying.you</Text>
+                <Text style={estilos.textoHeader}>Satisfying.you </Text>
+                <Text style={estilos.textoHeader}> <Icon name='mood' size={50} color='white' /></Text>
             </View>
 
             <View style={estilos.cInput} >
@@ -39,7 +41,9 @@ const estilos = StyleSheet.create({
     cTitulo: {
         flex: 0.15,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexDirection: 'row'
+        
     },
     cInput: {
         flex: 0.45,
