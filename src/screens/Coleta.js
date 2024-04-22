@@ -2,7 +2,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import IconFace from '../components/IconFace'
 
-const Coleta = () => {
+const Coleta = (props) => {
     return(
         <View style={estilos.view}>
 
@@ -14,8 +14,8 @@ const Coleta = () => {
                 <IconFace nomeIcone='sentiment-very-dissatisfied' cor='red' texto='Péssimo' />
                 <IconFace nomeIcone='sentiment-dissatisfied' cor='orange' texto='Ruim' />
                 <IconFace nomeIcone='sentiment-neutral' cor='yellow' texto='Neutro' />
-                <IconFace nomeIcone='sentiment-satisfied' cor='blue' texto='Bom' />
-                <IconFace nomeIcone='sentiment-very-satisfied' cor='green' texto='Excelente' />
+                <IconFace nomeIcone='sentiment-satisfied' cor='#05ad2c' texto='Bom' />
+                <IconFace nomeIcone='sentiment-very-satisfied' cor='#0ff007' texto='Excelente' />
             </View>
         </View>
     )

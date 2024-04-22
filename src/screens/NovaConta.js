@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import Botao from '../components/Botao'
 import AreaInput from '../components/AreaInput'
 
-const NovaConta = () => {
+const NovaConta = (props) => {
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -24,7 +24,11 @@ const NovaConta = () => {
             }, 3000);
             return
         }
-        setErro('PLACEHOLDER: REDIRECIONAR DEPOIS')
+        goToLogin()
+    }
+
+    const goToLogin = () => {
+        props.navigation.navigate('Login')
     }
 
     return(

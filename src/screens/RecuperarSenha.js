@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import Botao from '../components/Botao'
 import AreaInput from '../components/AreaInput'
 
-const RecuperarSenha = () => {
+const RecuperarSenha = (props) => {
 
     const [email, setEmail] = useState('')
     const [erro, setErro] = useState('')
@@ -22,7 +22,11 @@ const RecuperarSenha = () => {
             }, 3000);
             return
         }
-        setErro('PLACEHOLDER: REDIRECIONAR DEPOIS')
+        goToLogin()
+    }
+
+    const goToLogin = () => {
+        props.navigation.navigate('Login')
     }
 
     return(

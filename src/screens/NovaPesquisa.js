@@ -19,6 +19,7 @@ const NovaPesquisa = (props) => {
   const Cadastrar = () => {
     if (!Validar()) return;
     console.log("cadastrado");
+    props.navigation.navigate('HomePlaceholder')
   }
 
   return (

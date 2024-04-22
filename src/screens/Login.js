@@ -4,7 +4,7 @@ import Botao from '../components/Botao'
 import AreaInput from '../components/AreaInput'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -24,7 +24,12 @@ const Login = () => {
             }, 3000);
             return
         }
-        setErro('PLACEHOLDER: REDIRECIONAR DEPOIS')
+        goToPagina('HomePlaceholder')
+    }
+
+    // Navegar para outras páginas com StackNavigator
+    const goToPagina = (pagina) => {
+        props.navigation.navigate(pagina)
     }
 
     return(
@@ -44,8 +49,8 @@ const Login = () => {
             </View>
 
             <View style={estilos.cBotao} >
-                <Botao texto='Criar minha conta' cor='#3a91d1'/>
-                <Botao texto='Esqueci minha senha' cor='#aebeca'/>
+                <Botao funcao={() => goToPagina('NovaConta')} texto='Criar minha conta' cor='#3a91d1'/>
+                <Botao funcao={() => goToPagina('RecuperarSenha')} texto='Esqueci minha senha' cor='#aebeca'/>
             </View>
         </View>
     )

@@ -9,7 +9,7 @@ const ModificarPesquisa = (props) => {
   const [visibleModal, setVisibleModal] = useState(false);
 
   const Salvar = () => {
-    console.log("salvo")
+    props.navigation.navigate('HomePlaceholder')
   }
 
   return (
