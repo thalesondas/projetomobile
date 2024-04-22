@@ -6,7 +6,7 @@ const Botao = (props) => {
     const marginTop = parseInt(props.marginTop) || 15
 
     return(
-        <TouchableOpacity style={[estilos.fundo, { backgroundColor: props.cor, marginTop: marginTop}]}>
+        <TouchableOpacity onPress={props.funcao} style={[estilos.fundo, { backgroundColor: props.cor, marginTop: marginTop}]}>
             <Text style={estilos.texto}>{props.texto}</Text>
         </TouchableOpacity>
     )

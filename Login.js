@@ -1,9 +1,32 @@
+import { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Botao from './src/components/Botao'
 import AreaInput from './src/components/AreaInput'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Login = () => {
+
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [erro, setErro] = useState('')
+
+    const validarEmail = () => {
+        // Expressão regular para validar o formato do e-mail
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return regex.test(email)
+    }
+
+    const handleEntrar = () => {
+        if(!validarEmail() || !senha){
+            setErro('E-mail e/ou senha inválidos.')
+            setTimeout(() => {
+                setErro('')
+            }, 3000);
+            return
+        }
+        setErro('PLACEHOLDER: REDIRECIONAR DEPOIS')
+    }
+
     return(
         <View style={estilos.view}>
             <View style={estilos.cTitulo} >
@@ -13,10 +36,11 @@ const Login = () => {
 
             <View style={estilos.cInput} >
 
-                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' />
-                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' />
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' funcao={setEmail} />
+                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' funcao={setSenha} />
+                <Text style={estilos.erro}>{erro}</Text>
 
-                <Botao texto='Entrar' cor='#41b06c' marginTop='30' />
+                <Botao texto='Entrar' cor='#41b06c' marginTop='25' funcao={handleEntrar}  />
             </View>
 
             <View style={estilos.cBotao} >
@@ -37,6 +61,9 @@ const estilos = StyleSheet.create({
     textoHeader: {
         fontSize: 34,
         color: 'white'
+    },
+    erro: {
+        color: 'red'
     },
     cTitulo: {
         flex: 0.15,

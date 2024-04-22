@@ -1,16 +1,41 @@
-import { View, StyleSheet } from 'react-native'
+import { useState } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 import Botao from './src/components/Botao'
 import AreaInput from './src/components/AreaInput'
 
 const NovaConta = () => {
+
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [senha2, setSenha2] = useState('')
+    const [erro, setErro] = useState('')
+
+    const handleCadastrar = () => {
+        if(!email || !senha || !senha2){
+            setErro('Necessário o preenchimento de todos os campos.')
+            setTimeout(() => {
+                setErro('')
+            }, 3000);
+            return
+        } else if(senha != senha2){
+            setErro('O campo repetir senha difere da senha.')
+            setTimeout(() => {
+                setErro('')
+            }, 3000);
+            return
+        }
+        setErro('PLACEHOLDER: REDIRECIONAR DEPOIS')
+    }
+
     return(
         <View style={estilos.view}>
 
-                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' />
-                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' />
-                <AreaInput texto='Repetir Senha' placeholder='Coloque novamente a sua senha' ehSenha='true' />
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' funcao={setEmail} />
+                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' funcao={setSenha} />
+                <AreaInput texto='Repetir Senha' placeholder='Coloque novamente a sua senha' ehSenha='true' funcao={setSenha2} />
+                <Text style={estilos.erro}>{erro}</Text>
 
-                <Botao texto='CADASTRAR' cor='#41b06c' marginTop='30' />
+                <Botao texto='CADASTRAR' cor='#41b06c' marginTop='30' funcao={handleCadastrar} />
 
         </View>
     )
@@ -23,6 +48,9 @@ const estilos = StyleSheet.create({
         flexDirection: 'column',
         paddingHorizontal: 20,
         justifyContent: 'center',
+    },
+    erro: {
+        color: 'red'
     }
 })
 

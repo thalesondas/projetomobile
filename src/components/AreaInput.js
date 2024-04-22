@@ -19,7 +19,13 @@ const AreaInput = (props) => {
     return(
         <View>
             <Text style={estilos.texto}>{props.texto}</Text>
-            <TextInput secureTextEntry={ehSenha} keyboardType={tipoDeCampo} placeholder={props.placeholder} style={estilos.textoInput}></TextInput>
+            <TextInput
+                secureTextEntry={ehSenha}
+                keyboardType={tipoDeCampo}
+                placeholder={props.placeholder}
+                style={estilos.textoInput}
+                onChangeText={props.funcao}>
+            </TextInput>
         </View>
     )
 }
