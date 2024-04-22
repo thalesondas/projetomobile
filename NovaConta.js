@@ -6,9 +6,9 @@ const NovaConta = () => {
     return(
         <View style={estilos.view}>
 
-                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' />
-                <AreaInput texto='Senha' placeholder='Coloque sua senha' />
-                <AreaInput texto='Repetir Senha' placeholder='Coloque novamente a sua senha' />
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' />
+                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' />
+                <AreaInput texto='Repetir Senha' placeholder='Coloque novamente a sua senha' ehSenha='true' />
 
                 <Botao texto='CADASTRAR' cor='#41b06c' marginTop='30' />
 

@@ -11,8 +11,8 @@ const Login = () => {
 
             <View style={estilos.cInput} >
 
-                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' />
-                <AreaInput texto='Senha' placeholder='Coloque sua senha' />
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' />
+                <AreaInput texto='Senha' placeholder='Coloque sua senha' ehSenha='true' />
 
                 <Botao texto='Entrar' cor='#41b06c' marginTop='30' />
             </View>

@@ -2,10 +2,11 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 const Botao = (props) => {
 
-    const marginTopPadrao = parseInt(props.marginTop) || 15
+    // Colocar a margin top para 15px como padrão
+    const marginTop = parseInt(props.marginTop) || 15
 
     return(
-        <TouchableOpacity style={[estilos.fundo, { backgroundColor: props.cor, marginTop: marginTopPadrao}]}>
+        <TouchableOpacity style={[estilos.fundo, { backgroundColor: props.cor, marginTop: marginTop}]}>
             <Text style={estilos.texto}>{props.texto}</Text>
         </TouchableOpacity>
     )

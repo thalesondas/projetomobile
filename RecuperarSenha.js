@@ -8,7 +8,7 @@ const RecuperarSenha = () => {
 
             <View style={estilos.cPrincipal} >
 
-                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' />
+                <AreaInput texto='E-mail' placeholder='Coloque seu e-mail' tipoDeCampo='email-address' />
 
                 <Botao texto='RECUPERAR' cor='#41b06c' marginTop='60' />
             </View>
