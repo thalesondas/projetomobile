@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Botao from './src/components/Botao'
-import AreaInput from './src/components/AreaInput'
+import Botao from '../components/Botao'
+import AreaInput from '../components/AreaInput'
 
 const NovaConta = () => {
 

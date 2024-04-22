@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Botao from './src/components/Botao'
-import AreaInput from './src/components/AreaInput'
+import Botao from '../components/Botao'
+import AreaInput from '../components/AreaInput'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Login = () => {
@@ -66,18 +66,18 @@ const estilos = StyleSheet.create({
         color: 'red'
     },
     cTitulo: {
-        flex: 0.15,
+        flex: 0.20,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
         
     },
     cInput: {
-        flex: 0.45,
+        flex: 0.55,
         justifyContent: 'center'
     },
     cBotao: {
-        flex: 0.40,
+        flex: 0.25,
         justifyContent: 'center'
     }
 })
