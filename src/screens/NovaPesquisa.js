@@ -22,21 +22,18 @@ const NovaPesquisa = (props) => {
   }
 
   const Cadastrar = () => {
-    console.log(txtData)
-    return
     if (!Validar()) return;
-    console.log("cadastrado");
     props.navigation.navigate('HomePlaceholder')
   }
 
   const SelecionarData = (evento, data) => {
+    setCalendario(false)
     if (data) {
       let dia = data.getDate().toString().padStart(2, '0')
       let mes = (data.getMonth() + 1).toString().padStart(2, '0')
       let ano = data.getFullYear().toString()
       setData(dia + "/" + mes + "/" + ano)
     }
-    setCalendario(false)
   }
 
   return (
