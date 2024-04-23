@@ -1,25 +1,42 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import Botao2 from '../components/Botao2';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const NovaPesquisa = (props) => {
   const [txtNome, setNome] = useState('');
   const [txtData, setData] = useState('');
   const [erroNome, setErroNome] = useState(false);
   const [erroData, setErroData] = useState(false);
+  const [calendario, setCalendario] = useState(false);
 
   const Validar = () => {
     nome = txtNome === ''
     data = txtData === ''
+    
     setErroNome(nome);
     setErroData(data);
     return !(nome || data)
   }
 
   const Cadastrar = () => {
+    console.log(txtData)
+    return
     if (!Validar()) return;
     console.log("cadastrado");
     props.navigation.navigate('HomePlaceholder')
+  }
+
+  const SelecionarData = (evento, data) => {
+    if (data) {
+      let dia = data.getDate().toString().padStart(2, '0')
+      let mes = (data.getMonth() + 1).toString().padStart(2, '0')
+      let ano = data.getFullYear().toString()
+      setData(dia + "/" + mes + "/" + ano)
+    }
+    setCalendario(false)
   }
 
   return (
@@ -34,7 +51,13 @@ const NovaPesquisa = (props) => {
           
           <View>
             <Text style={estilos.texto}>Data</Text>
-            <TextInput style={estilos.input} onChangeText={setData}/>
+            <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}} placeholder='DD/MM/YYYY'/>
+            
+            <TouchableOpacity onPress={() => {setCalendario(true)}}>
+              <Icon name="edit-calendar" size={40} color="#ffffff"></Icon>
+            </TouchableOpacity>
+            
+            {calendario && (<DateTimePicker mode={'date'} value={new Date()} onChange={SelecionarData}/>)}
             {erroData && (<Text style={estilos.textoErro}>Preencha a data</Text>)}
           </View>
           

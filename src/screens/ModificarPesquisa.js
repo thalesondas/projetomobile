@@ -1,4 +1,5 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 import { useState } from 'react';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -35,7 +36,7 @@ const ModificarPesquisa = (props) => {
             
             <View>
             <Text style={estilos.texto}>Data</Text>
-            <TextInput style={estilos.input} onChangeText={setData}/>
+            <TextInputMask style={estilos.input} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}}/>
             </View>
             
             <View>
