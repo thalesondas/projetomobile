@@ -1,5 +1,6 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -8,6 +9,7 @@ const ModificarPesquisa = (props) => {
   const [txtNome, setNome] = useState('');
   const [txtData, setData] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
+  const [calendario, setCalendario] = useState(false);
 
   const Salvar = () => {
     props.navigation.navigate('HomePlaceholder')
@@ -25,6 +27,16 @@ const ModificarPesquisa = (props) => {
     setVisibleModal(false)
   }
 
+  const SelecionarData = (evento, data) => {
+    if (data) {
+      let dia = data.getDate().toString().padStart(2, '0')
+      let mes = (data.getMonth() + 1).toString().padStart(2, '0')
+      let ano = data.getFullYear().toString()
+      setData(dia + "/" + mes + "/" + ano)
+    }
+    setCalendario(false)
+  }
+
   return (
     <View style={estilos.fundo}>
       <View style={estilos.componentes}>
@@ -35,8 +47,16 @@ const ModificarPesquisa = (props) => {
             </View>
             
             <View>
-            <Text style={estilos.texto}>Data</Text>
-            <TextInputMask style={estilos.input} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}}/>
+              <Text style={estilos.texto}>Data</Text>
+
+              <View style={estilos.cInputData}>
+                <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}} placeholder='DD/MM/YYYY'/>
+                <TouchableOpacity onPress={() => {setCalendario(true)}} style={{position: "absolute"}}>
+                  <Icon name="edit-calendar" size={40} color="#000000"></Icon>
+                </TouchableOpacity>
+              </View>
+
+              {calendario && (<DateTimePicker mode={'date'} value={new Date()} onChange={SelecionarData}/>)}
             </View>
             
             <View>
@@ -93,7 +113,13 @@ const estilos = StyleSheet.create({
     backgroundColor: "#ffffff",
     fontFamily: "AveriaLibre-Regular",
     fontSize: 28,
-    color: "#3F92C5"
+    color: "#3F92C5",
+    width: "100%"
+  },
+  cInputData: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'flex-end'
   },
   Imagem: {
     backgroundColor: "#ffffff",
