@@ -51,12 +51,14 @@ const NovaPesquisa = (props) => {
           
           <View>
             <Text style={estilos.texto}>Data</Text>
-            <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}} placeholder='DD/MM/YYYY'/>
-            
-            <TouchableOpacity onPress={() => {setCalendario(true)}}>
-              <Icon name="edit-calendar" size={40} color="#ffffff"></Icon>
-            </TouchableOpacity>
-            
+
+            <View style={estilos.cInputData}>
+              <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}} placeholder='DD/MM/YYYY'/>
+              <TouchableOpacity onPress={() => {setCalendario(true)}} style={{position: "absolute"}}>
+                <Icon name="edit-calendar" size={40} color="#000000"></Icon>
+              </TouchableOpacity>
+            </View>
+
             {calendario && (<DateTimePicker mode={'date'} value={new Date()} onChange={SelecionarData}/>)}
             {erroData && (<Text style={estilos.textoErro}>Preencha a data</Text>)}
           </View>
@@ -106,7 +108,13 @@ const estilos = StyleSheet.create({
     backgroundColor: "#ffffff",
     fontFamily: "AveriaLibre-Regular",
     fontSize: 28,
-    color: "#3F92C5"
+    color: "#3F92C5",
+    width: "100%"
+  },
+  cInputData: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'flex-end'
   },
   Imagem: {
     backgroundColor: "#ffffff",
