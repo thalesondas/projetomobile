@@ -1,79 +1,78 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-
-# Getting Started
-
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
-
-## Step 1: Start the Metro Server
-
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
+# Para iniciar o aplicativo mobile:
 
 ```bash
-# using npm
-npm start
+# depois de configurar o emulador de android
+emulator -avd android -no-snapshot
 
-# OR using Yarn
-yarn start
-```
+# e depois
 
-## Step 2: Start your Application
+npx react-native run-android
+````
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Especificação do projeto e critérios de avaliação
 
-### For Android
+**Projeto Mobile - Satisfying.you**
 
-```bash
-# using npm
-npm run android
+Descrição geral do projeto:
 
-# OR using Yarn
-yarn android
-```
+A pesquisa de satisfação é essencial para entender como os clientes de uma corporação se sentem em relação à empresa. Por meio dos dados coletados, a empresa pode realizar melhorias em seu processo, pessoas e/ou produtos/serviços.
 
-### For iOS
+Nesse sentido, é proposto nesta disciplina o desenvolvimento de uma aplicação para dispositivos móveis compatível com Android/iOS para realizar pesquisas com clientes/usuários de uma corporação.
 
-```bash
-# using npm
-npm run ios
+**Os requisitos gerais do projeto são:**
 
-# OR using Yarn
-yarn ios
-```
+**1. Gestão de usuários:** cadastro e autenticação de usuários, e recuperação de senha;
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+**2. Gestão de pesquisas:** cada usuário poderá gerenciar diferentes pesquisas de produtos/serviços;
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+**3. Coleta da satisfação do usuário;**
 
-## Step 3: Modifying your App
+**4. Produção de relatórios gráficos por pesquisa.**
 
-Now that you have successfully run the app, let's modify it.
+## Parte 1
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+A primeira parte do projeto visa o desenvolvimento da interface gráfica do projeto utilizando a biblioteca React-Native sem considerar a autenticação de usuários e persistência de dados. Contudo, é obrigatório seguir as cores, os ícones, o fluxo de navegação, fontes, esquema de layout do protótipo disponível em Figma.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+### Os critérios avaliativos da parte 1 e suas respectivas pontuações estão listados abaixo:
 
-## Congratulations! :tada:
+**Critério 1 (2,7).** Elaboração de todas as interfaces do aplicativo seguindo o layout e cores do protótipo, incluindo:
 
-You've successfully run and modified your React Native App. :partying_face:
+- Login
 
-### Now what?
+- Criar conta
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- Recuperar senha
 
-# Troubleshooting
+- Home
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- Nova pesquisa
 
-# Learn More
+- Modificar pesquisa
 
-To learn more about React Native, take a look at the following resources:
+- Ações de pesquisa
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Coleta de satisfação
+
+- Agradecimentos
+
+**Critério 2 (1,2).** Checagem de campos nas seguintes telas:
+
+- Login - verificação de e-mail válido
+
+- NovaConta - verificação de senhas iguais e e-mail
+
+- RecuperarSenha - verificação de email válido
+
+- NovaPesquisa - verificação de todos os campos preenchidos
+
+**Critério 3 (1,0).** Criação do componente Card da pesquisa: contendo nome da pesquisa, data da pesquisa e a imagem da pesquisa. Os dados exibidos neste componente devem ser passados por meio de atributos do componente.
+
+**Critério 4 (1,5).** Implementação da barra lateral de navegação (DrawerNavigator)
+
+**Critério 5 (1,0).** Implementação da navegação utilizando Stack Navigator	
+
+**Critério 6 (0,7).** Exibição de caixa de diálogo (pop up) para confirmar exclusão de uma vacina.
+
+**Critério 7 (1,0).** Implementação da interface de relatório de uma pesquisa contendo um gráfico de Pizza, contendo legenda. Utilize dados fictícios.
+
+**Critério 8 (0,9).** Timer de 3 segundos para realizar a transição automática da tela AgradecimentoParticipacao para a tela Coleta.
