@@ -25,6 +25,7 @@ const DrawerNavigator = () => {
             <Icon name="description" size={48} color="#ffffff"></Icon>
           ),
           drawerLabelStyle: {
+            fontFamily: 'AveriaLibre-Regular',
             fontSize: 24,
           },
         }}

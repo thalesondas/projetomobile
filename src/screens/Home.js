@@ -1,10 +1,10 @@
-import {View, StyleSheet, Text, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 import Botao from '../components/Botao';
 import Card from '../components/Card';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const HomePlaceholder = props => {
+const Home = props => {
   const cardsData = [
     {
       id: 1,
@@ -56,7 +56,7 @@ const HomePlaceholder = props => {
         <Botao
           texto="Nova Pesquisa"
           cor="#41b06c"
-          marginTop="60"
+          marginTop="70"
           funcao={() => goToPagina('NovaPesquisa')}
         />
       </View>
@@ -69,9 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#30236a',
     flex: 1,
     flexDirection: 'column',
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: 20
   },
   texto: {
     fontFamily: 'AveriaLibre-Regular',
@@ -80,6 +78,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchBar: {
+    fontFamily: 'AveriaLibre-Regular',
+    fontSize: 20,
     backgroundColor: '#fff',
     paddingBottom: 6,
     paddingTop: 6,
@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
   carousel: {
     flex: 0.4,
     flexDirection: 'row',
-    gap: 10,
+    gap: 15,
   },
   button: {
     flex: 0.3,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   search: {
     flex: 0.3,
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomePlaceholder;
+export default Home;
