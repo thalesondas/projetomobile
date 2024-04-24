@@ -23,7 +23,7 @@ const NovaPesquisa = (props) => {
 
   const Cadastrar = () => {
     if (!Validar()) return;
-    props.navigation.navigate('HomePlaceholder')
+    props.navigation.navigate('Home')
   }
 
   const SelecionarData = (evento, data) => {

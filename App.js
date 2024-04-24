@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import NovaConta from './src/screens/NovaConta';
 import RecuperarSenha from './src/screens/RecuperarSenha';
-import HomePlaceholder from './src/screens/HomePlaceholder';
+import Home from './src/screens/Home';
 import AcoesPesquisa from './src/screens/AcoesPesquisa';
 import NovaPesquisa from './src/screens/NovaPesquisa';
 import ModificarPesquisa from './src/screens/ModificarPesquisa';
@@ -44,8 +44,8 @@ const App = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="HomePlaceholder"
-          component={HomePlaceholder}
+          name="Home"
+          component={Home}
           options={{headerShown: false}}
         />
         <Stack.Screen

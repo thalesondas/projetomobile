@@ -12,12 +12,12 @@ const ModificarPesquisa = (props) => {
   const [calendario, setCalendario] = useState(false);
 
   const Salvar = () => {
-    props.navigation.navigate('HomePlaceholder')
+    props.navigation.navigate('Home')
   }
 
   const Excluir = () => {
     ClosePopup()
-    props.navigation.navigate('HomePlaceholder')
+    props.navigation.navigate('Home')
   }
 
   const OpenPopup = () => {

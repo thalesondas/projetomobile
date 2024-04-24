@@ -1,5 +1,5 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import HomePlaceholder from './HomePlaceholder';
+import Home from './Home';
 import CustomDrawer from '../components/CustomDrawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,7 +19,7 @@ const DrawerNavigator = () => {
       drawerContent={props => <CustomDrawer {...props} />}>
       <Drawer.Screen
         name="Pesquisas"
-        component={HomePlaceholder}
+        component={Home}
         options={{
           drawerIcon: () => (
             <Icon name="description" size={48} color="#ffffff"></Icon>
