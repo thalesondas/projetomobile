@@ -1,8 +1,9 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 const Card = props => {
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.funcao}>
       <View style={styles.icon}>
         <Image
           style={styles.image}
@@ -13,7 +14,7 @@ const Card = props => {
       </View>
       <Text style={styles.text}>{props.text}</Text>
       <Text style={styles.textDate}>{props.date}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

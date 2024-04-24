@@ -5,31 +5,35 @@ import Card from '../components/Card';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Home = props => {
+
+  const goToPagina = pagina => {
+    props.navigation.navigate(pagina);
+  };
+
   const cardsData = [
     {
       id: 1,
+      funcao: () => goToPagina('AcoesPesquisa'),
       image: 'https://cdn-icons-png.flaticon.com/512/3474/3474360.png',
       text: 'SECOMP 2023',
       date: '10/10/2023',
     },
     {
       id: 2,
+      funcao: () => goToPagina('AcoesPesquisa'),
       image: 'https://img.icons8.com/?size=256&id=85167&format=png',
       text: 'UBUNTU',
       date: '05/06/2022',
     },
     {
       id: 3,
+      funcao: () => goToPagina('AcoesPesquisa'),
       image:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp6k9K1beGbZbGUGJmkjjjR8lqxpWvNfp7hrU6Del5DA&s',
       text: 'MENINAS CPU',
       date: '01/03/2022',
     },
   ];
-
-  const goToPagina = pagina => {
-    props.navigation.navigate(pagina);
-  };
 
   return (
     <View style={styles.view}>
@@ -45,7 +49,7 @@ const Home = props => {
       <View style={styles.carousel}>
         {cardsData.map(card => (
           <Card
-            key={card.id}
+            funcao={card.funcao}
             image={card.image}
             text={card.text}
             date={card.date}
