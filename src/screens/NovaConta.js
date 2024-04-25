@@ -22,7 +22,7 @@ const NovaConta = (props) => {
             setTimeout(() => {
                 setErro('')
             }, 3000);
-        } else if (!validarEmail() || !senha){
+        } else if (!validarEmail()){
             setErro('E-mail inválido.')
             setTimeout(() => {
                 setErro('')
