@@ -18,11 +18,13 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName='Login'
         screenOptions={{
           headerStyle: {backgroundColor: '#21174c'},
           headerTitleStyle: {fontFamily: 'AveriaLibre-Regular'},
           headerTintColor: 'white',
-        }}>
+        }}
+      >
         <Stack.Screen
           name="Login"
           component={Login}

@@ -49,6 +49,7 @@ const Home = props => {
       <View style={styles.carousel}>
         {cardsData.map(card => (
           <Card
+            key={card.id}
             funcao={card.funcao}
             image={card.image}
             text={card.text}

@@ -7,11 +7,11 @@ const AreaInput = (props) => {
         if(props.ehSenha === 'true'){
             return true
         }
-        return null
+        return false
     }
 
-    // Colocar campo <TextInput> como padrão false para campo de senha
-    const ehSenha = parseBoolean(props.ehSenha) || false
+    // retornar booleano true ou false
+    const ehSenha = parseBoolean(props.ehSenha)
 
     // Colocar tipo de campo sendo default como padrão
     const tipoDeCampo = props.tipoDeCampo || 'default'
