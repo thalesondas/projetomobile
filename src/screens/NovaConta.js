@@ -12,6 +12,13 @@ const NovaConta = (props) => {
     const [senha2, setSenha2] = useState('')
     const [erro, setErro] = useState('')
 
+    const mostrarErro = (msg) => {
+        setErro(msg);
+        setTimeout(() => {
+            setErro('');
+        }, 3000);
+    }
+
     const validarEmail = () => {
         // Expressão regular para validar o formato do e-mail
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -20,35 +27,20 @@ const NovaConta = (props) => {
 
     const handleCadastrar = () => {
         if(!email || !senha || !senha2){
-            setErro('Necessário o preenchimento de todos os campos.')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            mostrarErro('Necessário o preenchimento de todos os campos.')
         } else if (!validarEmail()){
-            setErro('E-mail inválido.')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            mostrarErro('E-mail inválido.')
         } else if(senha.length < 6 || senha2.length < 6){
-            setErro('Senha deve ser maior do que 5 digitos.')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            mostrarErro('Senha deve ser maior do que 5 digitos.')
         } else if(senha != senha2){
-            setErro('O campo repetir senha difere da senha.')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            mostrarErro('O campo repetir senha difere da senha.')
         } else {
             createUserWithEmailAndPassword(auth, email, senha)
                 .then(() => {
                     props.navigation.navigate('Login')
                 })
                 .catch(() => {
-                    setErro('Erro ao criar o usuário no banco de dados.')
-                    setTimeout(() => {
-                        setErro('')
-                    }, 3000)
+                    mostrarErro('Erro ao criar o usuário no banco de dados.')
                 })
         }
     }

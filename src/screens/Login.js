@@ -11,6 +11,13 @@ const Login = props => {
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
 
+  const mostrarErro = (msg) => {
+    setErro(msg);
+    setTimeout(() => {
+      setErro('');
+    }, 3000);
+  }
+
   const validarEmail = () => {
     // Expressão regular para validar o formato do e-mail
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,20 +26,14 @@ const Login = props => {
 
   const handleEntrar = () => {
     if (!validarEmail()) {
-      setErro('E-mail inválido.');
-      setTimeout(() => {
-        setErro('');
-      }, 3000);
+      mostrarErro('E-mail inválido.')
     } else {
       signInWithEmailAndPassword(auth, email, senha)
         .then(() => {
           goToPagina('DrawerNavigator');
         })
         .catch(() => {
-          setErro('E-mail e/ou senha não cadastrados.')
-          setTimeout(() => {
-              setErro('')
-          }, 3000)
+          mostrarErro('E-mail e/ou senha não cadastrados.')
       })
     }
   };

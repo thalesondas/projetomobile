@@ -10,6 +10,13 @@ const RecuperarSenha = (props) => {
     const [email, setEmail] = useState('')
     const [erro, setErro] = useState('')
 
+    const mostrarErro = (msg) => {
+        setErro(msg);
+        setTimeout(() => {
+            setErro('');
+        }, 3000);
+    }
+
     const validarEmail = () => {
         // Expressão regular para validar o formato do e-mail
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -18,20 +25,14 @@ const RecuperarSenha = (props) => {
 
     const handleRecuperar = () => {
         if(!validarEmail()){
-            setErro('E-mail inválido.')
-            setTimeout(() => {
-                setErro('')
-            }, 3000);
+            mostrarErro('E-mail inválido.')
         } else {
             sendPasswordResetEmail(auth, email)
                 .then(() => {
                     props.navigation.navigate('Login')
                 })
                 .catch(() => {
-                    setErro('E-mail não cadastrado.')
-                    setTimeout(() => {
-                        setErro('')
-                    }, 3000)
+                    mostrarErro('E-mail não cadastrado.')
                 })
                 
         }
