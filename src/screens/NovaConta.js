@@ -30,7 +30,7 @@ const NovaConta = (props) => {
                 setErro('')
             }, 3000);
         } else if(senha.length < 6 || senha2.length < 6){
-            setErro('Senha deve ser maior do que 5 digitos!')
+            setErro('Senha deve ser maior do que 5 digitos.')
             setTimeout(() => {
                 setErro('')
             }, 3000);
@@ -45,7 +45,7 @@ const NovaConta = (props) => {
                     props.navigation.navigate('Login')
                 })
                 .catch(() => {
-                    setErro('Erro ao criar o usuário no banco de dados!')
+                    setErro('Erro ao criar o usuário no banco de dados.')
                     setTimeout(() => {
                         setErro('')
                     }, 3000)

@@ -22,7 +22,7 @@ const App = () => {
         screenOptions={{
           headerStyle: {backgroundColor: '#21174c'},
           headerTitleStyle: {fontFamily: 'AveriaLibre-Regular'},
-          headerTintColor: 'white',
+          headerTintColor: 'white'
         }}
       >
         <Stack.Screen

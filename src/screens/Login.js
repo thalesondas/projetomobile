@@ -28,9 +28,8 @@ const Login = props => {
         .then(() => {
           goToPagina('DrawerNavigator');
         })
-        .catch((erro) => {
-          console.log(JSON.stringify(erro))
-          setErro('E-mail e/ou senha não cadastrados!')
+        .catch(() => {
+          setErro('E-mail e/ou senha não cadastrados.')
           setTimeout(() => {
               setErro('')
           }, 3000)

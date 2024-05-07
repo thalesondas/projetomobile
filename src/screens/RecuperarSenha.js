@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '../firebase/config'
 import Botao from '../components/Botao'
 import AreaInput from '../components/AreaInput'
 
@@ -16,12 +18,22 @@ const RecuperarSenha = (props) => {
 
     const handleRecuperar = () => {
         if(!validarEmail()){
-            setErro('E-mail parece ser inválido.')
+            setErro('E-mail inválido.')
             setTimeout(() => {
                 setErro('')
             }, 3000);
         } else {
-            props.navigation.navigate('Login')
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    props.navigation.navigate('Login')
+                })
+                .catch(() => {
+                    setErro('E-mail não cadastrado.')
+                    setTimeout(() => {
+                        setErro('')
+                    }, 3000)
+                })
+                
         }
     }
 
