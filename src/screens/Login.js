@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/config';
 import Botao from '../components/Botao';
 import AreaInput from '../components/AreaInput';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,13 +18,23 @@ const Login = props => {
   };
 
   const handleEntrar = () => {
-    if (!validarEmail() || !senha) {
-      setErro('E-mail e/ou senha inválidos.');
+    if (!validarEmail()) {
+      setErro('E-mail inválido.');
       setTimeout(() => {
         setErro('');
       }, 3000);
     } else {
-      goToPagina('DrawerNavigator');
+      signInWithEmailAndPassword(auth, email, senha)
+        .then(() => {
+          goToPagina('DrawerNavigator');
+        })
+        .catch((erro) => {
+          console.log(JSON.stringify(erro))
+          setErro('E-mail e/ou senha não cadastrados!')
+          setTimeout(() => {
+              setErro('')
+          }, 3000)
+      })
     }
   };
 
