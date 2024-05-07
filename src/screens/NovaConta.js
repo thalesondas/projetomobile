@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase/config'
 import Botao from '../components/Botao'
 import AreaInput from '../components/AreaInput'
 
@@ -27,13 +29,27 @@ const NovaConta = (props) => {
             setTimeout(() => {
                 setErro('')
             }, 3000);
+        } else if(senha.length < 6 || senha2.length < 6){
+            setErro('Senha deve ser maior do que 5 digitos!')
+            setTimeout(() => {
+                setErro('')
+            }, 3000);
         } else if(senha != senha2){
             setErro('O campo repetir senha difere da senha.')
             setTimeout(() => {
                 setErro('')
             }, 3000);
         } else {
-            props.navigation.navigate('Login')
+            createUserWithEmailAndPassword(auth, email, senha)
+                .then(() => {
+                    props.navigation.navigate('Login')
+                })
+                .catch(() => {
+                    setErro('Erro ao criar o usuário no banco de dados!')
+                    setTimeout(() => {
+                        setErro('')
+                    }, 3000)
+                })
         }
     }
 
