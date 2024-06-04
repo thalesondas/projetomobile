@@ -4,10 +4,13 @@ import Card from '../components/Card';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPesquisas } from '../redux/slicers';
 
 const Home = props => {
 
-  const [listaPesquisas, setListaPesquisas] = useState()
+  const dispatch = useDispatch()
+  const pesquisas = useSelector(state => state.pesquisas)
 
   useEffect(() => {
     const q = query(collection(db, "pesquisas"));
@@ -21,7 +24,7 @@ const Home = props => {
         })
       })
 
-      setListaPesquisas(pesquisas);
+      dispatch(setPesquisas(pesquisas));
     })
   }, []);
 
