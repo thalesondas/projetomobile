@@ -1,10 +1,29 @@
 import {View, StyleSheet, TextInput} from 'react-native';
 import Botao from '../components/Botao';
 import Card from '../components/Card';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useEffect, useState } from 'react';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 const Home = props => {
+
+  const [listaPesquisas, setListaPesquisas] = useState()
+
+  useEffect(() => {
+    const q = query(collection(db, "pesquisas"));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const pesquisas = [];
+      snapshot.forEach(doc => {
+        pesquisas.push({
+          id: doc.id,
+          ...doc.data()
+        })
+      })
+
+      setListaPesquisas(pesquisas);
+    })
+  }, []);
 
   const goToPagina = pagina => {
     props.navigation.navigate(pagina);

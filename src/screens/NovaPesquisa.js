@@ -15,15 +15,15 @@ const NovaPesquisa = (props) => {
   const [calendario, setCalendario] = useState(false);
 
   const db = getFirestore(app);
-  const projetoCollection = collection(db, "projetos");
+  const pesquisaCollection = collection(db, "pesquisas");
 
-  const addProjeto = () => {
-    const docProjeto = {
+  const addPesquisa = () => {
+    const docPesquisa = {
       nome: txtNome,
       data: txtData
     }
 
-    addDoc(projetoCollection, docProjeto)
+    addDoc(pesquisaCollection, docPesquisa)
       .then((docRef) => {
         console.log("DocRef" + docRef.id)
       })
@@ -43,7 +43,7 @@ const NovaPesquisa = (props) => {
 
   const Cadastrar = () => {
     if (!Validar()) return;
-    addProjeto();
+    addPesquisa();
     props.navigation.navigate('DrawerNavigator')
   }
 
@@ -90,7 +90,7 @@ const NovaPesquisa = (props) => {
         </View>
 
         <View>
-          <Botao2 texto="CADASTRAR" onclick={() => addProjeto()} funcao={Cadastrar} cor="#37BD6D"/>
+          <Botao2 texto="CADASTRAR" onclick={() => addPesquisa()} funcao={Cadastrar} cor="#37BD6D"/>
         </View>
       </View>
     </View>
