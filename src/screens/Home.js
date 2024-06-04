@@ -1,61 +1,50 @@
-import {View, StyleSheet, TextInput} from 'react-native';
-import Botao from '../components/Botao';
-import Card from '../components/Card';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { FlatList } from 'react-native-gesture-handler';
 import { setPesquisas } from '../redux/slicers';
+import app from '../firebase/config';
+import Botao from '../components/Botao';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Card from '../components/Card';
 
 const Home = props => {
 
   const dispatch = useDispatch()
-  const pesquisas = useSelector(state => state.pesquisas)
+  const pesquisas = useSelector(state => state.pesquisas.pesquisas)
+  const db = getFirestore(app);
 
   useEffect(() => {
     const q = query(collection(db, "pesquisas"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const pesquisas = [];
+      const listaPesquisas = [];
       snapshot.forEach(doc => {
-        pesquisas.push({
+        listaPesquisas.push({
           id: doc.id,
           ...doc.data()
         })
       })
 
-      dispatch(setPesquisas(pesquisas));
+      dispatch(setPesquisas(listaPesquisas));
     })
   }, []);
+
+  const itemPesquisa = ({ item }) => {
+    return(
+      <Card
+        key={item.id}
+        image='https://cdn-icons-png.flaticon.com/512/3474/3474360.png'
+        text={item.nome}
+        date={item.data}
+      />
+    )
+  }
 
   const goToPagina = pagina => {
     props.navigation.navigate(pagina);
   };
-
-  const cardsData = [
-    {
-      id: 1,
-      funcao: () => goToPagina('AcoesPesquisa'),
-      image: 'https://cdn-icons-png.flaticon.com/512/3474/3474360.png',
-      text: 'SECOMP 2023',
-      date: '10/10/2023',
-    },
-    {
-      id: 2,
-      funcao: () => goToPagina('AcoesPesquisa'),
-      image: 'https://img.icons8.com/?size=256&id=85167&format=png',
-      text: 'UBUNTU',
-      date: '05/06/2022',
-    },
-    {
-      id: 3,
-      funcao: () => goToPagina('AcoesPesquisa'),
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp6k9K1beGbZbGUGJmkjjjR8lqxpWvNfp7hrU6Del5DA&s',
-      text: 'MENINAS CPU',
-      date: '01/03/2022',
-    },
-  ];
 
   return (
     <View style={styles.view}>
@@ -69,15 +58,7 @@ const Home = props => {
         </View>
       </View>
       <View style={styles.carousel}>
-        {cardsData.map(card => (
-          <Card
-            key={card.id}
-            funcao={card.funcao}
-            image={card.image}
-            text={card.text}
-            date={card.date}
-          />
-        ))}
+        <FlatList data={pesquisas} renderItem={itemPesquisa} keyExtractor={pesquisa => pesquisa.id} />
       </View>
       <View style={styles.button}>
         <Botao
