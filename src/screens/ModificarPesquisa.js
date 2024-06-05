@@ -1,17 +1,32 @@
+import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import { updateDoc, doc, getFirestore } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useState } from 'react';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import app from '../firebase/config';
+import { update } from 'firebase/database';
 
 const ModificarPesquisa = (props) => {
+
+  const id = useSelector(state => state.id.id)
+  const db = getFirestore(app);
+
   const [txtNome, setNome] = useState('');
   const [txtData, setData] = useState('');
   const [visibleModal, setVisibleModal] = useState(false);
   const [calendario, setCalendario] = useState(false);
 
   const Salvar = () => {
+    const pesquisaRef = doc(db, "pesquisas", id);
+
+    updateDoc(pesquisaRef, {
+      nome: txtNome,
+      data: txtData
+    })
+
     props.navigation.navigate('DrawerNavigator')
   }
 

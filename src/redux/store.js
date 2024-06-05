@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import pesquisasSlice from './slicers'
+import rootReducer from "./slicers";
 
 const store = configureStore({
-    reducer: {
-        pesquisas: pesquisasSlice
-    }
+    reducer: rootReducer
 })
 
 export default store;

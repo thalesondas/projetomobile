@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
-import { setPesquisas } from '../redux/slicers';
+import { setId, setPesquisas } from '../redux/slicers';
 import app from '../firebase/config';
 import Botao from '../components/Botao';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,6 +16,8 @@ const Home = props => {
   const db = getFirestore(app);
 
   useEffect(() => {
+
+    dispatch(setId(null));
     const q = query(collection(db, "pesquisas"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -32,9 +34,16 @@ const Home = props => {
   }, []);
 
   const itemPesquisa = ({ item }) => {
+
+    const funcaoNavegacao = () => {
+      dispatch(setId(item.id));
+      goToPagina('AcoesPesquisa');
+    }
+
     return(
       <Card
         key={item.id}
+        funcao={funcaoNavegacao}
         image='https://cdn-icons-png.flaticon.com/512/3474/3474360.png'
         text={item.nome}
         date={item.data}

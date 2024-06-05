@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, combineReducers } from "@reduxjs/toolkit";
 
 const pesquisasSlice = createSlice({
     name: "pesquisas",
@@ -8,6 +8,20 @@ const pesquisasSlice = createSlice({
     }
 })
 
-export const { setPesquisas } = pesquisasSlice.actions;
+const idSlice = createSlice({
+    name: "id",
+    initialState: { id: null },
+    reducers: {
+        setId: (state, action) => { state.id = action.payload }
+    }
+})
 
-export default pesquisasSlice.reducer;
+const rootReducer = combineReducers ({
+    pesquisas: pesquisasSlice.reducer,
+    id: idSlice.reducer
+})
+
+export const { setPesquisas } = pesquisasSlice.actions;
+export const { setId } = idSlice.actions;
+
+export default rootReducer;
