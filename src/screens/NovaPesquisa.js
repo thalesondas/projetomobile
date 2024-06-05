@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import app, { storage } from '../../src/firebase/config.js'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { uploadBytes, ref } from 'firebase/storage';
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import app from '../../src/firebase/config.js'
 
 const NovaPesquisa = (props) => {
   const [txtNome, setNome] = useState('');
@@ -42,12 +43,24 @@ const NovaPesquisa = (props) => {
       })
   }
 
-  const addPesquisa = () => {
+  const addPesquisa = async() => {
     const docPesquisa = {
       nome: txtNome,
       data: txtData,
       urlFoto: urlFoto
     }
+
+    const imageRef = ref(storage, `${txtNome}.jpeg`)
+    const file = await fetch(urlFoto)
+    const blob = await file.blob()
+
+    uploadBytes(imageRef, blob, { contentType: 'image/jpeg' })
+      .then(() =>{
+        console.log("Arquivo enviado com sucesso.")
+      })
+      .catch((erro) => {
+        console.log("Erro ao enviar o arquivo: " + JSON.stringify(erro))
+      })
 
     addDoc(pesquisaCollection, docPesquisa)
       .then((docRef) => {
