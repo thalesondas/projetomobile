@@ -87,6 +87,7 @@ const ModificarPesquisa = (props) => {
 
   const Excluir = () => {
     deleteDoc(doc(db, "pesquisas", pesquisa.id))
+    deletarImagem()
     ClosePopup()
     props.navigation.navigate('DrawerNavigator')
   }
