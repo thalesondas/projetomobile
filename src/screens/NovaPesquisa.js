@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { getFirestore, collection, addDoc } from 'firebase/firestore'
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useState } from 'react';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
 import app from '../../src/firebase/config.js'
 
 const NovaPesquisa = (props) => {

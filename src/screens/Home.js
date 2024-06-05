@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
-import { setId, setPesquisas } from '../redux/slicers';
+import { setPesquisa, setListaPesquisas } from '../redux/slicers';
 import app from '../firebase/config';
 import Botao from '../components/Botao';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -12,31 +12,31 @@ import Card from '../components/Card';
 const Home = props => {
 
   const dispatch = useDispatch()
-  const pesquisas = useSelector(state => state.pesquisas.pesquisas)
+  const listaPesquisas = useSelector(state => state.listaPesquisas.listaPesquisas)
   const db = getFirestore(app);
 
   useEffect(() => {
 
-    dispatch(setId(null));
+    dispatch(setPesquisa({ id: null, nome: null, data: null }));
     const q = query(collection(db, "pesquisas"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const listaPesquisas = [];
+      const listaPesquisasAux = [];
       snapshot.forEach(doc => {
-        listaPesquisas.push({
+        listaPesquisasAux.push({
           id: doc.id,
           ...doc.data()
         })
       })
 
-      dispatch(setPesquisas(listaPesquisas));
+      dispatch(setListaPesquisas(listaPesquisasAux));
     })
   }, []);
 
   const itemPesquisa = ({ item }) => {
 
     const funcaoNavegacao = () => {
-      dispatch(setId(item.id));
+      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data }));
       goToPagina('AcoesPesquisa');
     }
 
@@ -68,7 +68,7 @@ const Home = props => {
       </View>
       <View style={styles.carousel}>
         <FlatList
-          data={pesquisas}
+          data={listaPesquisas}
           renderItem={itemPesquisa}
           keyExtractor={pesquisa => pesquisa.id}
           horizontal={true}

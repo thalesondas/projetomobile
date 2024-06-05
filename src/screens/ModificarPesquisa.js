@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
-import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
+import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
+import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import app from '../firebase/config';
-import { update } from 'firebase/database';
 
 const ModificarPesquisa = (props) => {
 
-  const id = useSelector(state => state.id.id)
+  const pesquisa = useSelector(state => state.pesquisa)
   const db = getFirestore(app);
 
   const [txtNome, setNome] = useState('');
@@ -19,8 +18,13 @@ const ModificarPesquisa = (props) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [calendario, setCalendario] = useState(false);
 
+  useEffect(() => {
+    setNome(pesquisa.nome)
+    setData(pesquisa.data)
+  }, [])
+
   const Salvar = () => {
-    const pesquisaRef = doc(db, "pesquisas", id);
+    const pesquisaRef = doc(db, "pesquisas", pesquisa.id);
 
     updateDoc(pesquisaRef, {
       nome: txtNome,
@@ -31,7 +35,7 @@ const ModificarPesquisa = (props) => {
   }
 
   const Excluir = () => {
-    deleteDoc(doc(db, "pesquisas", id))
+    deleteDoc(doc(db, "pesquisas", pesquisa.id))
     ClosePopup()
     props.navigation.navigate('DrawerNavigator')
   }
@@ -59,14 +63,14 @@ const ModificarPesquisa = (props) => {
         <View style={estilos.cInput}>
             <View>
             <Text style={estilos.texto}>Nome</Text>
-            <TextInput style={estilos.input} onChangeText={setNome}/>
+            <TextInput style={estilos.input} onChangeText={setNome} value={txtNome}/>
             </View>
             
             <View>
               <Text style={estilos.texto}>Data</Text>
 
               <View style={estilos.cInputData}>
-                <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}} placeholder='DD/MM/YYYY'/>
+                <TextInputMask style={estilos.input} value={txtData} onChangeText={setData} type={'datetime'} options={{format: "DD/MM/YYYY"}}/>
                 <TouchableOpacity onPress={() => {setCalendario(true)}} style={{position: "absolute"}}>
                   <Icon name="edit-calendar" size={40} color="#000000"></Icon>
                 </TouchableOpacity>
@@ -93,7 +97,7 @@ const ModificarPesquisa = (props) => {
 
         <Modal visible={visibleModal} transparent={true}>
           <View style={estilos.modal}>
-            <Text style={estilos.texto}>Tem certeza de apagar essa pesquisa?</Text>
+            <Text style={estilos.texto}>Tem certeza de apagar a pesquisa {pesquisa.nome}?</Text>
             <View style={estilos.modalBotoes}>
               <Botao2 texto="SIM" funcao={Excluir} cor="#FF8383" width="40%"/>
               <Botao2 texto="CANCELAR" funcao={ClosePopup} cor="#3F92C5" width="40%"/>
