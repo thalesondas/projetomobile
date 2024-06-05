@@ -13,7 +13,6 @@ const NovaPesquisa = (props) => {
   const [txtNome, setNome] = useState('');
   const [txtData, setData] = useState('');
   const [urlFoto, setUrlFoto] = useState('');
-  const [foto, setFoto] = useState('')
   const [erroNome, setErroNome] = useState(false);
   const [erroData, setErroData] = useState(false);
   const [calendario, setCalendario] = useState(false);
@@ -25,7 +24,6 @@ const NovaPesquisa = (props) => {
     launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
@@ -36,7 +34,6 @@ const NovaPesquisa = (props) => {
     launchImageLibrary()
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))

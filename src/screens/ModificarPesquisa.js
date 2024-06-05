@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useSelector } from 'react-redux';
 import app, { storage } from '../firebase/config';
-import { updateDoc, doc, getFirestore, deleteDoc, collection } from 'firebase/firestore';
+import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
@@ -18,7 +18,6 @@ const ModificarPesquisa = (props) => {
   const [txtNome, setNome] = useState(pesquisa.nome);
   const [txtData, setData] = useState(pesquisa.data);
   const [urlFoto, setUrlFoto] = useState(pesquisa.urlFoto)
-  const [foto, setFoto] = useState('')
   const [visibleModal, setVisibleModal] = useState(false);
   const [calendario, setCalendario] = useState(false);
 
@@ -64,7 +63,6 @@ const ModificarPesquisa = (props) => {
     launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
@@ -73,12 +71,9 @@ const ModificarPesquisa = (props) => {
 
   const escolherNovaImagem = () => {
 
-    const imagemRef = ref(storage, urlFoto);
-
     launchImageLibrary()
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
