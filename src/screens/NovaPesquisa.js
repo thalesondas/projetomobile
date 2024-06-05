@@ -45,7 +45,7 @@ const NovaPesquisa = (props) => {
 
   const addPesquisa = async() => {
 
-    const imageRef = ref(storage, `${txtNome}.jpeg`)
+    const imageRef = ref(storage, `${txtNome}_${txtData.replaceAll("/", "-")}.jpeg`)
     const file = await fetch(urlFoto)
     const blob = await file.blob()
 
