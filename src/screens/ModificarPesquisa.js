@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useSelector } from 'react-redux';
-import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
+import app, { storage } from '../firebase/config';
+import { updateDoc, doc, getFirestore, deleteDoc, collection } from 'firebase/firestore';
+import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import app from '../firebase/config';
 
 const ModificarPesquisa = (props) => {
 
@@ -21,19 +22,45 @@ const ModificarPesquisa = (props) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [calendario, setCalendario] = useState(false);
 
-  const Salvar = () => {
+  const Salvar = async() => {
     const pesquisaRef = doc(db, "pesquisas", pesquisa.id);
 
-    updateDoc(pesquisaRef, {
-      nome: txtNome,
-      data: txtData,
-      urlFoto: urlFoto
-    })
+    const imageRef = ref(storage, `${txtNome}_${txtData.replaceAll("/", "-")}.jpeg`)
+    const file = await fetch(urlFoto)
+    const blob = await file.blob()
+
+    deletarImagem()
+    uploadBytes(imageRef, blob, { contentType: 'image/jpeg' })
+      .then(() => {
+        console.log("Arquivo enviado com sucesso.")
+        getDownloadURL(imageRef)
+          .then((url) => {
+            updateDoc(pesquisaRef, {
+              nome: txtNome,
+              data: txtData,
+              urlFoto: url
+            })
+          })
+      })
+      .catch((erro) => {
+        console.log("Erro no uploadBytes: " + JSON.stringify(erro))
+      })
 
     props.navigation.navigate('DrawerNavigator')
   }
 
+  const deletarImagem = () => {
+    deleteObject(ref(storage, pesquisa.urlFoto))
+      .then(() => {
+        console.log('Imagem deletada com sucesso.');
+      })
+      .catch((erro) => {
+        console.error('Erro ao deletar imagem: ', JSON.stringify(erro));
+      });
+  }
+
   const capturarNovaImagem = () => {
+
     launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
@@ -45,6 +72,9 @@ const ModificarPesquisa = (props) => {
   }
 
   const escolherNovaImagem = () => {
+
+    const imagemRef = ref(storage, urlFoto);
+
     launchImageLibrary()
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
