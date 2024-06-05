@@ -58,7 +58,13 @@ const Home = props => {
         </View>
       </View>
       <View style={styles.carousel}>
-        <FlatList data={pesquisas} renderItem={itemPesquisa} keyExtractor={pesquisa => pesquisa.id} />
+        <FlatList
+          data={pesquisas}
+          renderItem={itemPesquisa}
+          keyExtractor={pesquisa => pesquisa.id}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
       <View style={styles.button}>
         <Botao
