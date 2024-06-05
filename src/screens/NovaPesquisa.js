@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
@@ -10,6 +11,8 @@ import app from '../../src/firebase/config.js'
 const NovaPesquisa = (props) => {
   const [txtNome, setNome] = useState('');
   const [txtData, setData] = useState('');
+  const [urlFoto, setUrlFoto] = useState('');
+  const [foto, setFoto] = useState('')
   const [erroNome, setErroNome] = useState(false);
   const [erroData, setErroData] = useState(false);
   const [calendario, setCalendario] = useState(false);
@@ -17,10 +20,33 @@ const NovaPesquisa = (props) => {
   const db = getFirestore(app);
   const pesquisaCollection = collection(db, "pesquisas");
 
+  const capturarImagem = () => {
+    launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
+      .then((result) => {
+        setUrlFoto(result.assets[0].uri)
+        setFoto(result.assets)
+      })
+      .catch((erro) => {
+        console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
+      })
+  }
+
+  const escolherImagem = () => {
+    launchImageLibrary()
+      .then((result) => {
+        setUrlFoto(result.assets[0].uri)
+        setFoto(result.assets)
+      })
+      .catch((erro) => {
+        console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
+      })
+  }
+
   const addPesquisa = () => {
     const docPesquisa = {
       nome: txtNome,
-      data: txtData
+      data: txtData,
+      urlFoto: urlFoto
     }
 
     addDoc(pesquisaCollection, docPesquisa)
@@ -83,9 +109,15 @@ const NovaPesquisa = (props) => {
           
           <View>
             <Text style={estilos.texto}>Imagem</Text>
-            <TouchableOpacity style={estilos.Imagem}>
-              <Text style={estilos.ImagemTexto}>Câmera/Galeria de imagens</Text>
-            </TouchableOpacity>
+            <View flexDirection='row' justifyContent='space-between'>
+              <TouchableOpacity style={estilos.Imagem} onPress={capturarImagem}>
+                <Text style={estilos.ImagemTexto}>Câmera</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={estilos.Imagem} onPress={escolherImagem}>
+                <Text style={estilos.ImagemTexto}>Galeria de fotos</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
@@ -136,7 +168,7 @@ const estilos = StyleSheet.create({
   },
   Imagem: {
     backgroundColor: "#ffffff",
-    width: "75%",
+    width: "47%",
     height: 80,
     justifyContent: "center",
     alignItems: "center"

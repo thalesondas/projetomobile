@@ -10,12 +10,13 @@ const listaPesquisasSlice = createSlice({
 
 const pesquisaSlice = createSlice({
     name: "pesquisa",
-    initialState: { id: null, nome: null, data: null },
+    initialState: { id: null, nome: null, data: null, urlFoto: null },
     reducers: {
         setPesquisa: (state, action) => {
             state.id = action.payload.id
             state.nome = action.payload.nome
             state.data = action.payload.data
+            state.urlFoto = action.payload.urlFoto
         }
     }
 })
