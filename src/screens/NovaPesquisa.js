@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import app, { storage } from '../../src/firebase/config.js'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { uploadBytes, ref } from 'firebase/storage';
+import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
@@ -36,7 +36,7 @@ const NovaPesquisa = (props) => {
     launchImageLibrary()
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets)
+        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
@@ -44,11 +44,6 @@ const NovaPesquisa = (props) => {
   }
 
   const addPesquisa = async() => {
-    const docPesquisa = {
-      nome: txtNome,
-      data: txtData,
-      urlFoto: urlFoto
-    }
 
     const imageRef = ref(storage, `${txtNome}.jpeg`)
     const file = await fetch(urlFoto)
@@ -57,17 +52,28 @@ const NovaPesquisa = (props) => {
     uploadBytes(imageRef, blob, { contentType: 'image/jpeg' })
       .then(() =>{
         console.log("Arquivo enviado com sucesso.")
+        getDownloadURL(imageRef)
+          .then((url) => {
+            const docPesquisa = {
+              nome: txtNome,
+              data: txtData,
+              urlFoto: url
+            }
+
+            addDoc(pesquisaCollection, docPesquisa)
+              .then((docRef) => {
+                console.log("DocRef" + docRef.id)
+              })
+              .catch((erro) => {
+                console.log("Erro: "+ erro)
+              })
+          })
+          .catch((erro) => {
+            console.log("Erro ao pegar imagem da URL: " + JSON.stringify(erro))
+          })
       })
       .catch((erro) => {
         console.log("Erro ao enviar o arquivo: " + JSON.stringify(erro))
-      })
-
-    addDoc(pesquisaCollection, docPesquisa)
-      .then((docRef) => {
-        console.log("DocRef" + docRef.id)
-      })
-      .catch((erro) => {
-        console.log("Erro: "+ erro)
       })
   }
 

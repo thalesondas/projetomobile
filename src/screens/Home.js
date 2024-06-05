@@ -44,7 +44,7 @@ const Home = props => {
       <Card
         key={item.id}
         funcao={funcaoNavegacao}
-        image='https://cdn-icons-png.flaticon.com/512/3474/3474360.png'
+        image={item.urlFoto}
         text={item.nome}
         date={item.data}
       />
