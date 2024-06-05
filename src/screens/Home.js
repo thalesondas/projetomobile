@@ -17,7 +17,7 @@ const Home = props => {
 
   useEffect(() => {
 
-    dispatch(setPesquisa({ id: null, nome: null, data: null }));
+    dispatch(setPesquisa({ id: null, nome: null, data: null, urlFoto: null }));
     const q = query(collection(db, "pesquisas"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -36,7 +36,7 @@ const Home = props => {
   const itemPesquisa = ({ item }) => {
 
     const funcaoNavegacao = () => {
-      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data }));
+      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data, urlFoto: item.urlFoto }));
       goToPagina('AcoesPesquisa');
     }
 

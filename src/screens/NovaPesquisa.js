@@ -25,7 +25,7 @@ const NovaPesquisa = (props) => {
     launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
       .then((result) => {
         setUrlFoto(result.assets[0].uri)
-        setFoto(result.assets)
+        setFoto(result.assets[0])
       })
       .catch((erro) => {
         console.log("Erro ao capturar imagem: " + JSON.stringify(erro))

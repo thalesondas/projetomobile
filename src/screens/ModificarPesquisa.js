@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useSelector } from 'react-redux';
 import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
@@ -13,25 +14,45 @@ const ModificarPesquisa = (props) => {
   const pesquisa = useSelector(state => state.pesquisa)
   const db = getFirestore(app);
 
-  const [txtNome, setNome] = useState('');
-  const [txtData, setData] = useState('');
+  const [txtNome, setNome] = useState(pesquisa.nome);
+  const [txtData, setData] = useState(pesquisa.data);
+  const [urlFoto, setUrlFoto] = useState(pesquisa.urlFoto)
+  const [foto, setFoto] = useState('')
   const [visibleModal, setVisibleModal] = useState(false);
   const [calendario, setCalendario] = useState(false);
-
-  useEffect(() => {
-    setNome(pesquisa.nome)
-    setData(pesquisa.data)
-  }, [])
 
   const Salvar = () => {
     const pesquisaRef = doc(db, "pesquisas", pesquisa.id);
 
     updateDoc(pesquisaRef, {
       nome: txtNome,
-      data: txtData
+      data: txtData,
+      urlFoto: urlFoto
     })
 
     props.navigation.navigate('DrawerNavigator')
+  }
+
+  const capturarNovaImagem = () => {
+    launchCamera({ mediaType: 'photo', cameraType: 'back', quality: 1 })
+      .then((result) => {
+        setUrlFoto(result.assets[0].uri)
+        setFoto(result.assets[0])
+      })
+      .catch((erro) => {
+        console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
+      })
+  }
+
+  const escolherNovaImagem = () => {
+    launchImageLibrary()
+      .then((result) => {
+        setUrlFoto(result.assets[0].uri)
+        setFoto(result.assets[0])
+      })
+      .catch((erro) => {
+        console.log("Erro ao capturar imagem: " + JSON.stringify(erro))
+      })
   }
 
   const Excluir = () => {
@@ -80,10 +101,17 @@ const ModificarPesquisa = (props) => {
             </View>
             
             <View>
-            <Text style={estilos.texto}>Imagem</Text>
-            <TouchableOpacity style={estilos.Imagem}>
-              <Image style={{width: 60, height: 60}} source={{uri:'https://reactnative.dev/img/tiny_logo.png'}}/>
-            </TouchableOpacity>
+              <Text style={estilos.texto}>Colocar nova imagem</Text>
+              
+              <View flexDirection='row' justifyContent='space-between'>
+                <TouchableOpacity style={estilos.Imagem} onPress={capturarNovaImagem}>
+                  <Text style={estilos.ImagemTexto}>Câmera</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={estilos.Imagem} onPress={escolherNovaImagem}>
+                  <Text style={estilos.ImagemTexto}>Galeria de fotos</Text>
+                </TouchableOpacity>
+              </View>
             </View>
         </View>
 
@@ -143,7 +171,7 @@ const estilos = StyleSheet.create({
   },
   Imagem: {
     backgroundColor: "#ffffff",
-    width: "75%",
+    width: "47%",
     height: 80,
     justifyContent: "center",
     alignItems: "center"
