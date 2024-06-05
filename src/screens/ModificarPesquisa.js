@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
-import { updateDoc, doc, getFirestore } from 'firebase/firestore';
+import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
@@ -31,6 +31,7 @@ const ModificarPesquisa = (props) => {
   }
 
   const Excluir = () => {
+    deleteDoc(doc(db, "pesquisas", id))
     ClosePopup()
     props.navigation.navigate('DrawerNavigator')
   }
