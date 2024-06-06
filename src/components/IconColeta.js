@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import useNavigate from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const IconColeta = (props) => {

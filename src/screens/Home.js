@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
-import { setPesquisa, setListaPesquisas } from '../redux/slicers';
+import { setPesquisa, setListaPesquisas, setPessimo, setRuim, setNeutro, setBom, setExcelente } from '../redux/slicers';
 import app from '../firebase/config';
 import Botao from '../components/Botao';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -17,7 +17,6 @@ const Home = props => {
 
   useEffect(() => {
 
-    dispatch(setPesquisa({ id: null, nome: null, data: null, urlFoto: null }));
     const q = query(collection(db, "pesquisas"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -36,8 +35,12 @@ const Home = props => {
   const itemPesquisa = ({ item }) => {
 
     const funcaoNavegacao = () => {
-      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data, urlFoto: item.urlFoto,
-                              voto: { pessimo: item.voto.pessimo, ruim: item.voto.ruim, neutro: item.voto.neutro, bom: item.voto.bom, excelente: item.voto.excelente } }));
+      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data, urlFoto: item.urlFoto }));
+      dispatch(setPessimo(item.voto.pessimo));
+      dispatch(setRuim(item.voto.ruim));
+      dispatch(setNeutro(item.voto.neutro));
+      dispatch(setBom(item.voto.bom));
+      dispatch(setExcelente(item.voto.excelente));
       goToPagina('AcoesPesquisa');
     }
 

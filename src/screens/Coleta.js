@@ -1,11 +1,44 @@
 import { View, StyleSheet, Text } from 'react-native'
 import IconColeta from '../components/IconColeta'
+import { useDispatch, useSelector } from 'react-redux'
+import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import app from '../firebase/config';
+import { setBom, setExcelente, setNeutro, setPessimo, setRuim } from '../redux/slicers';
 
 const Coleta = (props) => {
+    
+    const pesquisa = useSelector(state => state.pesquisa)
+    const db = getFirestore(app);
+    const pesquisaRef = doc(db, "pesquisas", pesquisa.id);
+    const dispatch = useDispatch()
 
-    const goToAgradecimentoParticipacao = () => {
-        props.navigation.navigate('AgradecimentoParticipacao')
-    }
+    const adicionarENavegar = (tipoVoto) => {
+        switch (tipoVoto) {
+            case 'pessimo':
+                updateDoc(pesquisaRef, { 'voto.pessimo': ++pesquisa.voto.pessimo })
+                dispatch(setPessimo(++pesquisa.voto.pessimo))
+                break;
+            case 'ruim':
+                updateDoc(pesquisaRef, { 'voto.ruim': ++pesquisa.voto.ruim})
+                dispatch(setRuim(++pesquisa.voto.ruim))
+                break;
+            case 'neutro':
+                updateDoc(pesquisaRef, { 'voto.neutro': ++pesquisa.voto.neutro })
+                dispatch(setNeutro(++pesquisa.voto.neutro))
+                break;
+            case 'bom':
+                updateDoc(pesquisaRef, { 'voto.bom': ++pesquisa.voto.bom })
+                dispatch(setBom(++pesquisa.voto.bom))
+                break;
+            case 'excelente':
+                updateDoc(pesquisaRef, { 'voto.excelente': ++pesquisa.voto.excelente })
+                dispatch(setExcelente(++pesquisa.voto.excelente))
+                break;
+            default:
+                break;
+        }
+        props.navigation.navigate('AgradecimentoParticipacao');
+    };
 
     return(
         <View style={estilos.view}>
@@ -15,11 +48,11 @@ const Coleta = (props) => {
             </View>
 
             <View style={estilos.cIcons} >
-                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-very-dissatisfied' cor='red' texto='Péssimo' />
-                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-dissatisfied' cor='orange' texto='Ruim' />
-                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-neutral' cor='yellow' texto='Neutro' />
-                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-satisfied' cor='#05ad2c' texto='Bom' />
-                <IconColeta funcao={goToAgradecimentoParticipacao} nomeIcone='sentiment-very-satisfied' cor='#0ff007' texto='Excelente' />
+                <IconColeta funcao={() => adicionarENavegar('pessimo')} nomeIcone='sentiment-very-dissatisfied' cor='red' texto='Péssimo' />
+                <IconColeta funcao={() => adicionarENavegar('ruim')} nomeIcone='sentiment-dissatisfied' cor='orange' texto='Ruim' />
+                <IconColeta funcao={() => adicionarENavegar('neutro')} nomeIcone='sentiment-neutral' cor='yellow' texto='Neutro' />
+                <IconColeta funcao={() => adicionarENavegar('bom')} nomeIcone='sentiment-satisfied' cor='#05ad2c' texto='Bom' />
+                <IconColeta funcao={() => adicionarENavegar('excelente')} nomeIcone='sentiment-very-satisfied' cor='#0ff007' texto='Excelente' />
             </View>
         </View>
     )
