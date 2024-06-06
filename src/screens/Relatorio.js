@@ -1,33 +1,37 @@
 import { View, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux';
 import { PieChart } from 'react-native-svg-charts'
 
 const Relatorio = () => {
+
+    const pesquisa = useSelector(state => state.pesquisa)
+
     const data = [
         {
-            key: 'Péssimo',
-            value: 50,
-            svg: { fill: '#53d8d8' },
-            arc: { outerRadius: '130%', cornerRadius: 10 }
+            key: 'pessimo',
+            value: pesquisa.voto.pessimo,
+            svg: { fill: '#53d8d8' }
         },
         {
-            key: 'Ruim',
-            value: 50,
+            key: 'ruim',
+            value: pesquisa.voto.ruim,
             svg: { fill: '#ea7288' }
         },
         {
-            key: 'Neutro',
-            value: 40,
+            key: 'neutro',
+            value: pesquisa.voto.neutro,
             svg: { fill: '#5fcda4' }
         },
         {
-            key: 'Bom',
-            value: 95,
+            key: 'bom',
+            value: pesquisa.voto.bom,
             svg: { fill: '#6994fe' }
         },
         {
-            key: 'Excelente',
-            value: 35,
-            svg: { fill: '#f1ce7e' }
+            key: 'excelente',
+            value: pesquisa.voto.excelente,
+            svg: { fill: '#f1ce7e' },
+            arc: { outerRadius: '130%', cornerRadius: 10 }
         }
     ]
 
@@ -35,7 +39,7 @@ const Relatorio = () => {
         <View style={estilos.view}>
             <PieChart
                 style={{ height: 500 }}
-                outerRadius={'80%'}
+                outerRadius={'70%'}
                 innerRadius={15}
                 data={data}
             />
@@ -47,10 +51,7 @@ const estilos = StyleSheet.create({
     view: {
         backgroundColor: '#30236a',
         flex: 1,
-        flexDirection: 'column',
-        paddingHorizontal: 20,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flexDirection: 'column'
     }
 })
 
