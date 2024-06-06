@@ -36,7 +36,8 @@ const Home = props => {
   const itemPesquisa = ({ item }) => {
 
     const funcaoNavegacao = () => {
-      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data, urlFoto: item.urlFoto }));
+      dispatch(setPesquisa({ id: item.id, nome: item.nome, data: item.data, urlFoto: item.urlFoto,
+                              voto: { pessimo: item.voto.pessimo, ruim: item.voto.ruim, neutro: item.voto.neutro, bom: item.voto.bom, excelente: item.voto.excelente } }));
       goToPagina('AcoesPesquisa');
     }
 
