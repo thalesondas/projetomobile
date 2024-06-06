@@ -1,9 +1,5 @@
-import {StyleSheet, View, Text} from 'react-native';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  DrawerItemList,
-} from '@react-navigation/drawer';
+import { StyleSheet, View, Text } from 'react-native';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const CustomDrawer = props => {

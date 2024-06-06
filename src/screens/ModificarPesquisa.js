@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { useSelector } from 'react-redux';
-import app, { storage } from '../firebase/config';
 import { updateDoc, doc, getFirestore, deleteDoc } from 'firebase/firestore';
 import { ref, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
+import app, { storage } from '../firebase/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'

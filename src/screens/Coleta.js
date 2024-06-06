@@ -1,9 +1,9 @@
 import { View, StyleSheet, Text } from 'react-native'
-import IconColeta from '../components/IconColeta'
 import { useDispatch, useSelector } from 'react-redux'
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import app from '../firebase/config';
 import { setBom, setExcelente, setNeutro, setPessimo, setRuim } from '../redux/slicers';
+import app from '../firebase/config';
+import IconColeta from '../components/IconColeta'
 
 const Coleta = (props) => {
     

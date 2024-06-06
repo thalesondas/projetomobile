@@ -1,7 +1,7 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Home from './Home';
 import CustomDrawer from '../components/CustomDrawer';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Drawer = createDrawerNavigator();
 

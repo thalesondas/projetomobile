@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
 import Botao from '../components/Botao';

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import app, { storage } from '../../src/firebase/config.js'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { TextInputMask } from 'react-native-masked-text';
+import app, { storage } from '../../src/firebase/config.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Botao2 from '../components/Botao2';
 import Icon from 'react-native-vector-icons/MaterialIcons'
