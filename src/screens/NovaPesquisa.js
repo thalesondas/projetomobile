@@ -6,7 +6,7 @@ import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 import { TextInputMask } from 'react-native-masked-text';
 import app, { storage } from '../../src/firebase/config.js'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Botao2 from '../components/Botao2';
+import Botao from '../components/Botao';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const NovaPesquisa = (props) => {
@@ -139,7 +139,7 @@ const NovaPesquisa = (props) => {
         </View>
 
         <View>
-          <Botao2 texto="CADASTRAR" onclick={() => addPesquisa()} funcao={Cadastrar} cor="#37BD6D"/>
+          <Botao texto="Cadastrar" onclick={() => addPesquisa()} funcao={Cadastrar} cor="#37BD6D"/>
         </View>
       </View>
     </View>

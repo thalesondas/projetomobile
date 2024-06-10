@@ -7,7 +7,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TextInputMask } from 'react-native-masked-text';
 import app, { storage } from '../firebase/config';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Botao2 from '../components/Botao2';
+import Botao from '../components/Botao';
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const ModificarPesquisa = (props) => {
@@ -141,8 +141,8 @@ const ModificarPesquisa = (props) => {
             </View>
         </View>
 
-        <View style={estilos.ViewBotao2}>
-          <Botao2 texto="SALVAR" funcao={Salvar} cor="#37BD6D" style={estilos.Botao2}/>
+        <View style={estilos.ViewBotao}>
+          <Botao texto="Salvar" funcao={Salvar} cor="#37BD6D" style={estilos.Botao}/>
           <TouchableOpacity style={estilos.deleteView} onPress={OpenPopup}>
             <Icon name="delete" size={40} color="#ffffff"></Icon>
             <Text style={estilos.deleteTexto}>Apagar</Text>
@@ -153,8 +153,8 @@ const ModificarPesquisa = (props) => {
           <View style={estilos.modal}>
             <Text style={estilos.texto}>Tem certeza de apagar a pesquisa {pesquisa.nome}?</Text>
             <View style={estilos.modalBotoes}>
-              <Botao2 texto="SIM" funcao={Excluir} cor="#FF8383" width="40%"/>
-              <Botao2 texto="CANCELAR" funcao={ClosePopup} cor="#3F92C5" width="40%"/>
+              <Botao texto="SIM" funcao={Excluir} cor="#FF8383" width="40%"/>
+              <Botao texto="CANCELAR" funcao={ClosePopup} cor="#3F92C5" width="40%"/>
             </View>
           </View>
         </Modal>
@@ -207,7 +207,7 @@ const estilos = StyleSheet.create({
     fontSize: 20,
     color: "#939393"
   },
-  ViewBotao2: {
+  ViewBotao: {
     flexDirection: "row",
     width: "80%",
     gap: 10
