@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, query, where } from 'firebase/firestore';
 import { FlatList } from 'react-native-gesture-handler';
 import { setPesquisa, setListaPesquisas, setPessimo, setRuim, setNeutro, setBom, setExcelente } from '../redux/slicers';
 import app from '../firebase/config';
@@ -15,9 +15,10 @@ const Home = props => {
   const listaPesquisas = useSelector(state => state.listaPesquisas.listaPesquisas)
   const db = getFirestore(app);
 
-  useEffect(() => {
+  const [filtroPesquisa, setFiltroPesquisa] = useState('');
 
-    const q = query(collection(db, "pesquisas"));
+  useEffect(() => {
+    const q = query(collection(db, 'pesquisas'));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const listaPesquisasAux = [];
@@ -29,6 +30,8 @@ const Home = props => {
       })
 
       dispatch(setListaPesquisas(listaPesquisasAux));
+
+      return () => unsubscribe();
     })
   }, []);
 
@@ -54,6 +57,10 @@ const Home = props => {
       />
     )
   }
+  
+  const listaFiltrada = listaPesquisas.filter(pesquisa =>
+    pesquisa.nome.toLowerCase().includes(filtroPesquisa.toLowerCase())
+  );
 
   const goToPagina = pagina => {
     props.navigation.navigate(pagina);
@@ -65,6 +72,7 @@ const Home = props => {
         <View style={styles.searchSection}>
           <Icon name="search" size={40}></Icon>
           <TextInput
+            onChangeText={texto => setFiltroPesquisa(texto)}
             style={styles.searchBar}
             placeholder="Insira o termo de busca"
           />
@@ -72,7 +80,7 @@ const Home = props => {
       </View>
       <View style={styles.carousel}>
         <FlatList
-          data={listaPesquisas}
+          data={listaFiltrada}
           renderItem={itemPesquisa}
           keyExtractor={pesquisa => pesquisa.id}
           horizontal={true}
